@@ -28,18 +28,18 @@
     <div id="app">
         <div class="navbar-fixed ">
             <nav>
-                <div class="nav-wrapper black" style="opacity: 0.9">
+                <div class="nav-wrapper pink" style="opacity: 0.9">
 
-                    <a class="brand-logo" href="{{ url('/') }}">
-                        {{ config('app.name', 'Chop Shop') }}
+                    <a class="brand-logo" href="{{ url('/home') }}">
+                       Team Light Blue
                     </a>
 
 
                     
 
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="/">Home</a></li>
 
+                        <li><a href="/home">Home</a></li>
                         @guest
                         @if (Route::has('register'))
                             <li class="nav-item">
@@ -53,9 +53,6 @@
                         </li>
                     @endif
                     @else
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/myorders">Orders</a></li>
-                    <li><a href="/cart/{{Auth::user()->id}}"><i class="fa fa-2 fa-shopping-cart"></i>1</a></li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
@@ -68,7 +65,7 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" class="grey-text" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>
@@ -86,48 +83,62 @@
             @yield('content')
         </main>
 
+        <ul id="slide-out" class="sidenav grey">
+            <li><div class="user-view">
+              <div class="background">
+                <img class="blog-img" src={{ asset("/imgs/it.jpg") }} width="100%" />
+              </div>
+              <a href="#user" style="font-size: 50px"><i class="fa fa-user-o"></i></a>
+              <a href="#name"><span class="white-text name">{{Auth::user()->name}}</span></a>
+              <a href="#email"><span class="white-text email">{{Auth::user()->email}}</span></a>
+            </div></li>
+            <li><a href="/inventory"><i class="fa fa-product-hunt"></i>Product Management</a></li>
+            <li><a href="#!"><i class="fa fa-users"></i>Customer Management</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Shipping & Orders</a></li>
+            <li><a class="waves-effect" href="/orders"><i class="fa fa-list"></i>Order Management</a></li>
+            <li><a class="waves-effect" href="#!"><i class="fa fa-plane"></i>Shipping Management</a></li>
+          </ul>
+
 
           <!-- Modal Structure -->
   <div id="modal1" class="modal" style="">
     <div class="modal-content">
         <div class="row">
-            <h6 class="col m6" id="pname"><h6>
-                <h6 class="col m6 right-align" >M <span id="pri"></span ><h6>
+            <h6 class="col m6">Midi Keyboard<h6>
+                <h6 class="col m6 right-align">M 800<h6>
         </div>
         <hr />
 
 
         <div class="row">
             <div class="col m6">
-                <img class="blog-img" src="" id="img" width="100%" />
+                <img class="blog-img" src={{ asset("/imgs/1.jpg") }} width="100%" />
             </div>
 
             <div class="col m6">
-                <p class="col m12" id="desc">
-
+                <p class="col m12">
+                    of type and scrambled it to make a type specimen bo
+                    ok. It has survived not only five centuries, but also the le
+                    ap into electronic typesetting, remaining essentially unchanged. It was popul
+                    arised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently 
+                    with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </p>
 
 
                 <div class="col m12">
-                    {{ Form::open(array('url' => '/add', 'method' => 'post', 'encytype' =>'multipart/form-data' ,'files'=>'true')) }}
+                    <form>
                         <div class="row">
                             <div class="input-field col s6" >
-                                <input id="q" type="number" name="quantity" class="validate" >
+                                <input id="last_name" type="number" class="validate" >
                                 <label for="last_name">Quantity</label>
                             </div>
-
-                            <input type="hidden" id="p_id" value="" name="product_id" />
+        
                             <div class="col s6 input-field">
-                                @auth
                                 <button class="btn pink">Add to Cart</button>
-                                @endauth
-                                
-                                @guest
-                                    Login To Purchase
-                                @endguest
                             </div>
                         </div>
-                    {{{ Form::close() }}}
+                    </form>
                 </div>
 
             </div>
